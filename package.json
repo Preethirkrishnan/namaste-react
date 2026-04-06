@@ -1,0 +1,30 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "Namaste React",
+  "scripts": {
+    "start": "parcel index.html",
+    "bulid": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Preethirkrishnan/namaste-react.git"
+  },
+  "author": "Preethi R",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Preethirkrishnan/namaste-react/issues"
+  },
+  "homepage": "https://github.com/Preethirkrishnan/namaste-react#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "browsersList": [
+    "last 2 versions"
+  ]
+}

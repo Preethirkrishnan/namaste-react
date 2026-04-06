@@ -1,3 +1,61 @@
-#heading{
-    color: red;
+body{
+    margin: 0px;
+}
+
+/*Header*/
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    border-bottom: 1px solid #dedede;
+}
+
+.logo{
+    width: 60px;
+}
+
+.nav-item ul{
+    list-style-type: none;
+    display: flex;
+}
+
+.nav-item ul li{
+    font-size: 18px;
+    padding: 10px;
+}
+
+/*Body*/
+.body{
+    margin: 10px 30px;
+}
+
+.search{
+    margin-bottom: 10px;
+}
+
+.res-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.res-card{
+    padding: 6px;
+    border-radius: 6px;
+    margin: 6px;
+}
+
+.res-card:hover{
+    border: 1px solid #fe9738;
+    transform: scale(1.025);
+    transition: all ease .3s;
+}
+
+.res-logo{
+    width: 300px;
+    border-radius: 6px;
+}
+
+.res-card h4{
+    margin: 6px;
 }
