@@ -61,9 +61,8 @@ body{
     margin: 6px;
 }
 
-.rated-btn{
+button, input{
     padding: 8px;
-    margin-bottom: 10px;
 }
 
 .btn-login{
@@ -78,4 +77,10 @@ body{
 .shimmer-card{
     width: 300px;
     background-color: #f0f0f0;
+}
+
+.filter{
+    display: flex;
+    gap: 10;
+    margin-bottom: 10px;
 }
