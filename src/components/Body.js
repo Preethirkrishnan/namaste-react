@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
+import {Link} from "react-router-dom";
 
 const Body = () => {
   // const arr = useState();
@@ -24,20 +25,24 @@ const Body = () => {
   const fetchData = async () => {
     const data = await fetch("https://namastedev.com/api/v1/listRestaurants");
     const json = await data.json();
+    console.log(
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants,
+    );
     //optional chaining
     setListOfRestaurants(
       json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        .restaurants,
+        ?.restaurants,
     );
     setFilteredRestaurants(
       json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        .restaurants,
+        ?.restaurants,
     );
   };
 
-  if (listOfRestaurants.length === 0) {
-    return <Shimmer />;
-  }
+  // if (listOfRestaurants.length === 0) {
+  //   return <Shimmer />;
+  // }
 
   return (
     <div className="body">
@@ -51,7 +56,7 @@ const Body = () => {
               const value = e.target.value;
               if (value === "") {
                 setFilteredRestaurants(listOfRestaurants);
-              } 
+              }
               setSearchText(value);
             }}
           />
@@ -80,7 +85,13 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            className="res-link"
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
