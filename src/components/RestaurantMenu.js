@@ -1,24 +1,12 @@
-import { useEffect, useState } from "react";
 import { CDN_URL } from "../utils/constants";
-import { RES_MENU_URL } from "../utils/constants";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  const [resDetails, setResDetails] = useState(null);
   const params = useParams();
-  console.log(params);
-
-  useEffect(() => {
-    fetchDetails();
-  }, []);
-
-  const fetchDetails = async () => {
-    const data = await fetch(RES_MENU_URL + params.resId);
-
-    const json = await data.json();
-    setResDetails(json?.data);
-  };
+  
+  const resDetails = useRestaurantMenu(params);
 
   //conditional checks
   if (resDetails === null) return <h1>Loading...</h1>;

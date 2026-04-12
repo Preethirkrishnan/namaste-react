@@ -120,3 +120,11 @@ button, input{
     color: #000;
     text-decoration: none;
 }
+
+.text-success{
+    color: green;
+}
+
+.text-danger{
+    color: red;
+}

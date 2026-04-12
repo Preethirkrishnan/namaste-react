@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
 import {Link} from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // const arr = useState();
@@ -25,10 +26,6 @@ const Body = () => {
   const fetchData = async () => {
     const data = await fetch("https://namastedev.com/api/v1/listRestaurants");
     const json = await data.json();
-    console.log(
-      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants,
-    );
     //optional chaining
     setListOfRestaurants(
       json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
@@ -40,9 +37,13 @@ const Body = () => {
     );
   };
 
-  // if (listOfRestaurants.length === 0) {
-  //   return <Shimmer />;
-  // }
+  const onlineStatus = useOnlineStatus();
+
+  if(!onlineStatus) return <h1>Looks like you're offline!! Please check your internet connection.</h1>
+
+  if (listOfRestaurants.length === 0) {
+    return <Shimmer />;
+  }
 
   return (
     <div className="body">
