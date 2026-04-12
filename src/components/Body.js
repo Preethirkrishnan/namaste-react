@@ -46,12 +46,12 @@ const Body = () => {
   }
 
   return (
-    <div className="body">
-      <div className="filter">
+    <div className="py-4 px-10">
+      <div className="flex gap-4 mb-4">
         <div>
           <input
             type="text"
-            className="search-box"
+            className="border border-gray-400 p-2 rounded focus:outline-none focus:ring focus:ring-blue-600"
             value={searchText}
             onChange={(e) => {
               const value = e.target.value;
@@ -62,6 +62,7 @@ const Body = () => {
             }}
           />
           <button
+            className="p-2 bg-blue-600 text-white hover:bg-blue-700 cursor-pointer ml-2 rounded"
             onClick={() => {
               const filteredRes = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase()),
@@ -73,7 +74,7 @@ const Body = () => {
           </button>
         </div>
         <button
-          className="rated-btn"
+          className="p-2 border border-blue-600 text-blue-600 cursor-pointer hover:text-white hover:bg-blue-600 rounded"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4.5,
@@ -84,10 +85,10 @@ const Body = () => {
           Top Rated Restaurant
         </button>
       </div>
-      <div className="res-container">
+      <div className="grid grid-cols-5 gap-5">
         {filteredRestaurants.map((restaurant) => (
           <Link
-            className="res-link"
+            className=""
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >

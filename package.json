@@ -18,7 +18,12 @@
   },
   "homepage": "https://github.com/Preethirkrishnan/namaste-react#readme",
   "devDependencies": {
-    "parcel": "^2.16.4"
+    "@tailwindcss/postcss": "^4.2.2",
+    "init": "^0.1.2",
+    "npx": "^10.2.2",
+    "parcel": "^2.16.4",
+    "postcss": "^8.5.9",
+    "tailwindcss": "^4.2.2"
   },
   "dependencies": {
     "react": "^19.2.4",
