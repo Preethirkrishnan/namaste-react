@@ -22,4 +22,15 @@ const RestaurantCard = ({ resData }) => {
   );
 };
 
+export const withVegLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute py-1 px-3 bg-green-600 text-white rounded text-sm">Veg</label>
+        <RestaurantCard {...props} />
+      </div>
+    )
+  }
+}
+
 export default RestaurantCard;

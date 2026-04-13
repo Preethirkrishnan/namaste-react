@@ -1,7 +1,7 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withVegLabel } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
@@ -17,7 +17,9 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   //whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
-  console.log("Body Rendered");
+  console.log("Body Rendered", listOfRestaurants);
+
+  const RestaurantCardVeg = withVegLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -39,7 +41,12 @@ const Body = () => {
 
   const onlineStatus = useOnlineStatus();
 
-  if(!onlineStatus) return <h1>Looks like you're offline!! Please check your internet connection.</h1>
+  if (!onlineStatus)
+    return (
+      <h1>
+        Looks like you're offline!! Please check your internet connection.
+      </h1>
+    );
 
   if (listOfRestaurants.length === 0) {
     return <Shimmer />;
@@ -92,7 +99,11 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant.info.veg ? (
+              <RestaurantCardVeg resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

@@ -1,7 +1,7 @@
-import { CDN_URL } from "../utils/constants";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const params = useParams();
@@ -24,11 +24,15 @@ const RestaurantMenu = () => {
 
   const categories =
     resDetails?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
-      ?.map((c) => c?.card?.card)
-      .filter(Boolean);
-
+      ?.filter(
+        (c) =>
+          c.card?.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+      )
+      .map((c) => c.card?.card);
+  
   return (
-    <div className="py-4 px-10">
+    <div className="py-4 px-10 w-7/12 mx-auto">
       <Link to="/" className="text-blue-600 hover:text-blue-800">
         Back To Restaurants
       </Link>
@@ -42,34 +46,8 @@ const RestaurantMenu = () => {
         <h5>{sla.slaString}</h5>
       </div>
 
-      {categories.map((cat, index) => (
-        <div key={index} className="mb-10">
-          <h3 className="font-bold text-xl mb-2">
-            {cat.title} ({cat.itemCards.length})
-          </h3>
-          {cat.itemCards.map((item) => (
-            <div
-              className="flex justify-between items-center border border-gray-300 rounded shadow-sm p-3 mb-3"
-              key={item.card.info.id}
-            >
-              <div>
-                <h4 className="mb-0 text-lg font-semibold">
-                  {item.card.info.name}
-                </h4>
-                <h4 className="mb-2 font-semibold">
-                  ₹{item.card.info.price / 100}
-                </h4>
-                <p>{item.card.info.description}</p>
-              </div>
-              <div>
-                <img
-                  className="w-40 rounded"
-                  src={CDN_URL + item.card.info.imageId}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+      {categories.map((cat) => (
+        <RestaurantCategory item={cat} key={cat.title} />
       ))}
     </div>
   );
