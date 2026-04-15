@@ -2,8 +2,11 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
+  const [showIndex, setShowIndex] = useState(0);
+
   const params = useParams();
 
   const resDetails = useRestaurantMenu(params);
@@ -30,7 +33,7 @@ const RestaurantMenu = () => {
           "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
       )
       .map((c) => c.card?.card);
-  
+
   return (
     <div className="py-4 px-10 w-7/12 mx-auto">
       <Link to="/" className="text-blue-600 hover:text-blue-800">
@@ -46,8 +49,13 @@ const RestaurantMenu = () => {
         <h5>{sla.slaString}</h5>
       </div>
 
-      {categories.map((cat) => (
-        <RestaurantCategory item={cat} key={cat.title} />
+      {categories.map((cat, index) => (
+        <RestaurantCategory
+          item={cat}
+          key={cat.title}
+          showItems={index === showIndex ? true : false}
+          setShowIndex={() => index === showIndex ? setShowIndex(null) : setShowIndex(index)}
+        />
       ))}
     </div>
   );

@@ -2,22 +2,21 @@ import { useState } from "react";
 import { CDN_URL } from "../utils/constants";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-const RestaurantCategory = ({ item }) => {
-  const [isCollapse, setIsCollapse] = useState(false);
+const RestaurantCategory = ({ item, showItems, setShowIndex }) => {
 
   return (
     <div className="bg-gray-50 rounded shadow-md p-4 mb-5">
       <div
         className="flex justify-between items-center cursor-pointer"
-        onClick={() => setIsCollapse(prev => !prev)}
+        onClick={() => setShowIndex()}
       >
-        <h3 className="font-bold text-xl">
+        <h3 className="font-bold text-lg">
           {item.title} ({item.itemCards.length})
         </h3>
-        {isCollapse ? <FaChevronDown /> : <FaChevronUp />}
+        {showItems ? <FaChevronDown /> : <FaChevronUp />}
       </div>
 
-      {!isCollapse && (
+      {showItems && (
         <div>
           {item.itemCards.map((c) => (
             <div
