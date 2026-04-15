@@ -5,11 +5,12 @@ import { useState } from "react";
 
 const About = () => {
   const [foodList, setFoodList] = useState(FOODS);
+  const [searchText, setSearchText] = useState("");
 
   const handleChange = (value) => {
-    console.log(value);
+    setSearchText(value);
     setFoodList(
-      foodList.filter((food) =>
+      FOODS.filter((food) =>
         food.name.toLowerCase().includes(value.toLowerCase()),
       ),
     );
@@ -17,7 +18,7 @@ const About = () => {
 
   return (
     <div className="m-5">
-      <Search onChange={handleChange} />
+      <Search value={searchText} onChange={handleChange} />
       <hr />
       <FoodList item={foodList} />
     </div>

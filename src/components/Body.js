@@ -1,8 +1,9 @@
 import RestaurantCard, { withVegLabel } from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   // const arr = useState();
@@ -15,6 +16,8 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const [searchText, setSearchText] = useState("");
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   //whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
   console.log("Body Rendered", listOfRestaurants);
@@ -54,7 +57,7 @@ const Body = () => {
 
   return (
     <div className="py-4 px-10">
-      <div className="flex gap-4 mb-4">
+      <div className="flex items-center gap-4 mb-4">
         <div>
           <input
             type="text"
@@ -91,6 +94,14 @@ const Body = () => {
         >
           Top Rated Restaurant
         </button>
+        <div>
+          <label>User Name:</label>
+          <input
+            className="border border-gray-400 p-2 rounded ml-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="grid grid-cols-5 gap-5">
         {filteredRestaurants.map((restaurant) => (
