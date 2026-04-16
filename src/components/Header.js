@@ -3,15 +3,21 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
 
-  const {loggedInUser} = useContext(UserContext);
+  const { loggedInUser } = useContext(UserContext);
+
+  //Subscribing to the store using a Selector hook
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
-    <div className="flex justify-between items-center py-3 px-10 shadow-md">
+    <div className="flex justify-between items-center py-3 px-10 shadow-md sticky top-0 z-1 bg-white">
       <div>
         <img className="w-17" src={LOGO_URL} />
       </div>
@@ -45,7 +51,14 @@ const Header = () => {
               Grocery
             </Link>
           </li>
-          <li>Cart</li>
+          <li className="font-semibold relative">
+            <Link to="/cart">
+              <FaShoppingCart />{" "}
+              <span className="absolute -top-2 -right-3 w-4 h-4 flex justify-center items-center text-xs shadow bg-red-600 rounded-full text-white">
+                {cartItems.length}
+              </span>
+            </Link>
+          </li>
           <button
             className="py-2 px-4 rounded border border-blue-600 text-blue-600 cursor-pointer hover:text-white hover:bg-blue-600"
             onClick={() =>
