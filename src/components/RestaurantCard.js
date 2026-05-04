@@ -15,7 +15,7 @@ const RestaurantCard = ({ resData }) => {
         className="mx-auto rounded-lg"
         src={CDN_URL + cloudinaryImageId}
         alt={name}
-        onError={(e) => (e.target.src = RES_URL)}
+        //onError={(e) => (e.target.src = RES_URL)}
       />
       <h2 className="mt-3 font-bold">{name}</h2>
       <h4>{cuisines.join(", ")}</h4>
